@@ -1,3 +1,6 @@
+using ElasticProject.Data.Service;
+using ElasticProject.Data.Service.Contracts;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IElasticsearchService, ElasticsearchService>();
 
 var app = builder.Build();
 
