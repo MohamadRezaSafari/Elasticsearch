@@ -1,10 +1,5 @@
 ﻿using ElasticProject.Data.Domain;
 using ElasticProject.Data.Service.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ElasticProject.Data.Infrastructure.Mapping;
 using Microsoft.Extensions.Configuration;
 using Nest;
