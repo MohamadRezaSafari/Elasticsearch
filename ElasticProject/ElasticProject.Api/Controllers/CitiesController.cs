@@ -1,6 +1,8 @@
+using CsvHelper;
 using ElasticProject.Data.Domain;
 using ElasticProject.Data.Service.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace ElasticProject.Api.Controllers
 {
@@ -19,8 +21,36 @@ namespace ElasticProject.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
+            var result = await _elasticsearchService.Search("cities");
+
+            //List<CityDto> records;
+
+            //using (var reader = new StreamReader(@"D:\Develop\Elasticsearch\ElasticProject\worldcities.csv"))
+            //using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            //{
+            //    records = csv.GetRecords<CityDto>().ToList();
+            //}
+
+            //var cities = new List<Cities>();
+
+            //for (int i = 0; i < records.Count; i++)
+            //{
+            //    var aa = records[i];
+
+            //    cities.Add(new Cities()
+            //    {
+            //        Id = i,
+            //        City = (records[i]).city,
+            //        Population = SetPopulation((records[i]).population),
+            //        CreatedDate = DateTime.UtcNow,
+
+            //    });
+            //}
+
+            //_elasticsearchService.InsertBulkDocuments("cities", cities);
+
             //_elasticsearchService.DeleteByIdDocument("cities", new Cities() { Id= 1 });
             //var cities = new List<Cities>()
             //{
@@ -60,7 +90,14 @@ namespace ElasticProject.Api.Controllers
 
             //_elasticsearchService.InsertBulkDocuments("cities", cities);
 
-            return Ok();
+            return Ok(result);
+        }
+
+        private int SetPopulation(string population)
+        {
+            Int32.TryParse(population, out int result);
+
+            return result;
         }
     }
 }

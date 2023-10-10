@@ -4,6 +4,8 @@ namespace ElasticProject.Data.Service.Contracts
 {
     public interface IElasticsearchService
     {
+        Task<List<CityDto>> Search(string indexName);
+        //Task<List<T>> Search<T>(string indexName) where T : class;
         Task CheckIndex(string indexName);
         Task InsertDocument(string indexName, Cities city);
         Task DeleteIndex(string indexName);

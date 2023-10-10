@@ -31,6 +31,148 @@ namespace ElasticProject.Data.Service
             return new ElasticClient(settings);
         }
 
+
+        public async Task<List<CityDto>> Search(string indexName)
+        {
+            var data = await _client.SearchAsync<CityDto>(i => i
+                .Index(indexName)
+                .
+
+            //var data = await _client.SearchAsync<CityDto>(i => i
+            //    .Index(indexName)
+            //    .Query(query => query
+            //        .MultiMatch(mm => mm
+            //            .Fields(fields => fields
+            //                .Field(f => f.City)
+            //                .Field(f => f.Id))
+            //            .Query("tok"))
+            //.Query(query =>query
+            //    .MatchPhrasePrefix(mp => mp
+            //        .Query("to"))
+            //.Query(query => query
+            //        .Fuzzy(fz => fz
+            //            .Field(f => f.City)
+            //            .Value("tok"))
+            //.MatchPhrase(mp => mp
+            //    .Field(field => field.City)
+            //    .Query("tokyo"))
+            //));
+
+            //var data = await _client.SearchAsync<CityDto>(i => i
+            //    .Index(indexName)
+            //    .Query(query => query
+            //        .CommonTerms(ct => ct
+            //            .Field(field => field.City)
+            //            .Analyzer("standard")
+            //            .Boost(1.1)
+            //            .CutoffFrequency(0.001)
+            //            .HighFrequencyOperator(Operator.And)
+            //            .LowFrequencyOperator(Operator.Or)
+            //            .MinimumShouldMatch(1)
+            //            .Name("named_query")
+            //            .Query("query"))
+            //    ));
+
+            // var data = await _client.SearchAsync<CityDto>(i => i
+            //         .Index(indexName)
+            //         .Source(src => src
+            //             .ExcludeAll()
+            //             .Includes(inc => inc
+            //                 .Fields(f => f.City)))
+            //     // .IncludeAll()
+            //     // .Excludes(ex => ex
+            //     //     .Fields(fields => fields
+            //     //         .Population)))
+            // );
+
+            // var data = await _client.SearchAsync<Cities>(i => i
+            //     .Index(indexName)
+            //     .Sort(sort => sort
+            //         .Descending(f => f.CreatedDate)
+            //     )
+            //     .SearchAfter(
+            //         "CreatedDate"
+            //     ));
+
+
+            // var data = await _client.SearchAsync<Cities>(i => i
+            //     .Index(indexName)
+            //     .ScriptFields(sf => sf
+            //         .ScriptField("test 123", sc => sc
+            //             .Source("doc['Population']")
+            //             .Params(p => p
+            //                 .Add("custom factor", "Hiya")))));
+
+            // var data = await _client.SearchAsync<Cities>(i => i
+            //     .Index(indexName)
+            //     .Profile()
+            //     .Query(query => query
+            //         .MatchAll()));
+
+            //     var data = await _client.SearchAsync<Cities>(i => i
+            //         .Index(indexName)
+            //         .PostFilter(f => f.MatchAll()));
+
+            // var data = await _client.SearchAsync<Cities>(i => i
+            //     .Index(indexName)
+            //     .MinScore(0.5)
+            //     .Query(query => query
+            //         .Term(term => term.City, "Tokyo")));
+
+            // var data = await _client.SearchAsync<Cities>(i => i
+            //     .Index(indexName)
+            //     .Query(query => query
+            //         .HasChild<CityDto>(child => child
+            //             .Query(childQuery => childQuery
+            //                 .MatchAll())
+            //             .InnerHits(ih => ih
+            //                 .Version()))));
+
+            // var data = await _client.SearchAsync<Cities>(i => i
+            //     .Index(indexName)
+            //     .Highlight(highlight => highlight
+            //         .Fields(fields => fields
+            //             .Field(field => field.Population)))
+            //     );
+
+            //var data = await _client.SearchAsync<Cities>(i => i
+            //    .Index(indexName)
+            //    .From(10)
+            //    .Size(200));
+
+            // eror
+            // 
+            //var data = await _client.SearchAsync<CityDto>(i => i
+            //    .Index(indexName)
+            //    .Query(query => ProjectFilter)
+            //    .Query(query => query
+            //        .Match(match => match.Field(field => field.Id > 0)))
+            //    .StoredFields(fields => fields
+            //        .Field(field => field.Id)
+            //        .Field(field => field.City)
+            //        .Field(field => field.Population))
+            //    );
+
+
+            return data.Documents.ToList();
+        }
+
+        //public async Task<List<T>> Search<T>(string indexName)
+        //{
+        //    var data = await _client.SearchAsync<T>(i => i
+        //        .Index(indexName)
+        //        //.Query(query => query
+        //        //    .Match(match => match.Field(field => field.Id > 0)))
+        //        .StoredFields(fields => fields
+        //            .Field(field => field.Id)
+        //            .Field(field => field.City)
+        //            .Field(field => field.Population))
+        //        );
+
+
+        //    return data.Documents.ToList();
+        //}
+
         public async Task CheckIndex(string indexName)
         {
             var indexExists = await _client.Indices.ExistsAsync(indexName);
