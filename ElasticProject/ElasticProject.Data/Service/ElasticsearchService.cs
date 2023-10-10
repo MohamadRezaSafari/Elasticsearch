@@ -32,11 +32,56 @@ namespace ElasticProject.Data.Service
         }
 
 
-        public async Task<List<CityDto>> Search(string indexName)
+        public async Task<List<Cities>> Search(string indexName)
         {
-            var data = await _client.SearchAsync<CityDto>(i => i
+            var data = await _client.SearchAsync<Cities>(i => i
                 .Index(indexName)
-                .
+                .Query(q => q
+                        .Wildcard(w => w
+                            .Field(f=>f.City)
+                            .Value("t*o"))
+                        //.Terms(t => t
+                        //    .Terms(new List<string>(){"tok"}))
+                        //.Regexp(rgx=>rgx
+                        //    .Field(f=>f.City)
+                        //    .Value("t.*o")
+                        //    .Flags("INTERSECTION|COMPLEMENT|EMPTY"))
+                        //.TermRange(tr => tr
+                        //    .Field(f => f.City)
+                        //    .GreaterThan("tokyo")
+                        //)
+                    //.DateRange(dr => dr
+                    //    .Field(f => f.CreatedDate)
+                    //    .GreaterThan(DateTime.Now.AddDays(-3))
+                    //    .LessThan(DateTime.Now.AddDays(10)))
+                    )
+            //.Prefix(pre => pre
+            //    .Field(f => f.City)
+            //    .Value("tok")))
+            //.Ids(ids => ids
+            //    .Values(1, 45, 6)))
+            );
+
+
+            //var data = await _client.SearchAsync<Cities>(i => i
+            //     .Index(indexName)
+            //     .Query(q => q
+            //         .FuzzyNumeric(fn => fn
+            //             .Field(f => f.Id)
+            //             .Fuzziness(100)
+            //             .Value(10)
+            //             .MaxExpansions(100)
+            //             .Transpositions(false))));
+
+            //var data = await _client.SearchAsync<Cities>(i => i
+            //    .Index(indexName)
+            //    .Query(q => q
+            //        .FuzzyDate(fd => fd
+            //                .Field(f => f.CreatedDate)
+            //                .Fuzziness(TimeSpan.FromDays(2))
+            //                .MaxExpansions(1)
+            //                .Transpositions()
+            //        )));
 
             //var data = await _client.SearchAsync<CityDto>(i => i
             //    .Index(indexName)
