@@ -37,19 +37,37 @@ namespace ElasticProject.Data.Service
             var data = await _client.SearchAsync<Cities>(i => i
                 .Index(indexName)
                 .Query(q => q
-                        .Wildcard(w => w
-                            .Field(f=>f.City)
-                            .Value("t*o"))
-                        //.Terms(t => t
-                        //    .Terms(new List<string>(){"tok"}))
-                        //.Regexp(rgx=>rgx
-                        //    .Field(f=>f.City)
-                        //    .Value("t.*o")
-                        //    .Flags("INTERSECTION|COMPLEMENT|EMPTY"))
-                        //.TermRange(tr => tr
-                        //    .Field(f => f.City)
-                        //    .GreaterThan("tokyo")
-                        //)
+                    //.ParentId(p=>p
+                    //    //.Type<>()
+                    //    .Id(10))
+                    //.Nested(n => n
+                    //    .InnerHits(ih => ih.Explain())
+                    //    .Path(p => p.Tags)
+                    //    .Query(nq => nq
+                    //        .Terms(t => t
+                    //            .Field(f => f.Tags.First().Name)
+                    //            .Terms("tag1", "tag2")))
+                    //    .IgnoreUnmapped())
+                    //.HasParent()
+                    //.HasChild<CityDto>(c => c
+                    //    .InnerHits(ih => ih.Explain())
+                    //    .ScoreMode(ChildScoreMode.Average)
+                    //    .Query(query => query.MatchAll()))
+                    //.Bool(b => b
+                    //    .Should(m => m.MatchAll()))
+                    //.Wildcard(w => w
+                    //    .Field(f=>f.City)
+                    //    .Value("t*o"))
+                    //.Terms(t => t
+                    //    .Terms(new List<string>(){"tok"}))
+                    //.Regexp(rgx=>rgx
+                    //    .Field(f=>f.City)
+                    //    .Value("t.*o")
+                    //    .Flags("INTERSECTION|COMPLEMENT|EMPTY"))
+                    //.TermRange(tr => tr
+                    //    .Field(f => f.City)
+                    //    .GreaterThan("tokyo")
+                    //)
                     //.DateRange(dr => dr
                     //    .Field(f => f.CreatedDate)
                     //    .GreaterThan(DateTime.Now.AddDays(-3))

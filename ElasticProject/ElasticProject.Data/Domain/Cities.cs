@@ -7,6 +7,12 @@
         public string Region { get; set; }
         public int Population { get; set; }
         public DateTime CreatedDate { get; set; }
+        public List<Tag> Tags{ get; set; }
+    }
+
+    public class Tag
+    {
+        public string Name { get; set; }
     }
 
 

@@ -89,7 +89,7 @@ namespace ElasticProject.Api.Controllers
             //};
 
             //_elasticsearchService.InsertBulkDocuments("cities", cities);
-
+            
             return Ok(result);
         }
 
