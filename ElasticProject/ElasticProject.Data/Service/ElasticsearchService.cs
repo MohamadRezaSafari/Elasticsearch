@@ -37,6 +37,13 @@ namespace ElasticProject.Data.Service
             var data = await _client.SearchAsync<Cities>(i => i
                 .Index(indexName)
                 .Query(q => q
+                        .SpanNot(s => s
+                            .Include(inc => inc
+                                .SpanTerm(st => st.Field(f => f.City).Value("tokyo")))
+                        //.SpanContaining(s => s
+                        //    .Little(l => l.SpanTerm(t => t.Field(f => f.City).Value("tokyo")))
+                        //    .Big(b => b.SpanTerm(t => t.Field(f => f.City).Value("tokyo")))
+                        )
                     //.ParentId(p=>p
                     //    //.Type<>()
                     //    .Id(10))
